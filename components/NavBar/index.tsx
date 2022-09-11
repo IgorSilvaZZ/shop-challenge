@@ -1,3 +1,7 @@
+import { useEffect } from "react";
+import { useSelector } from "react-redux";
+import { selectCart } from "../../store/cartSlice";
+
 import { ContainerNavBar, LogoSection, SectionCart } from "./style";
 
 interface INavBar {
@@ -5,6 +9,8 @@ interface INavBar {
 }
 
 export const NavBar = ({ handleCart }: INavBar) => {
+  const cart = useSelector(selectCart);
+
   return (
     <ContainerNavBar>
       <LogoSection>
@@ -15,7 +21,7 @@ export const NavBar = ({ handleCart }: INavBar) => {
       <SectionCart>
         <img src='cart.png' alt='Cart Icon' onClick={handleCart} />
 
-        <span>0</span>
+        <span>{cart.length}</span>
       </SectionCart>
     </ContainerNavBar>
   );

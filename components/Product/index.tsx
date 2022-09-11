@@ -1,3 +1,7 @@
+import { useDispatch } from "react-redux";
+
+import { cartActions } from "../../store/cartSlice";
+
 import {
   BoxProduct,
   ContentProduct,
@@ -10,6 +14,21 @@ import {
 } from "./style";
 
 export const Product = () => {
+  const dispatch = useDispatch();
+
+  function handleCart() {
+    dispatch(
+      cartActions.addCart({
+        id: 1,
+        name: "iPhone X 128 GB",
+        brand: "Apple",
+        description:
+          "O Apple iPhone X é um smartphone iOS avançado e abrangente em todos os pontos de vista com algumas características excelentes",
+        price: 2000.1,
+      })
+    );
+  }
+
   return (
     <BoxProduct>
       <ContentProduct>
@@ -30,7 +49,7 @@ export const Product = () => {
       </ContentProduct>
 
       <FooterProduct>
-        <img src='shopping-bag.png' alt='Bag Icon' />
+        <img src='shopping-bag.png' alt='Bag Icon' onClick={handleCart} />
         <span>COMPRAR</span>
       </FooterProduct>
     </BoxProduct>

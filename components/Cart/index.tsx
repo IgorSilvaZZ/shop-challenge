@@ -1,3 +1,5 @@
+import { useSelector } from "react-redux";
+import { selectCart } from "../../store/cartSlice";
 import {
   BoxQuantities,
   ButtonFinish,
@@ -20,6 +22,15 @@ interface ICart {
 }
 
 export const Cart = ({ isOpen, onClose }: ICart) => {
+  const cart = useSelector(selectCart);
+
+  const total =
+    cart.length > 0
+      ? cart.reduce((prevent, current) => {
+          return prevent + current.price;
+        }, 0)
+      : 0;
+
   return (
     <ContainerCart isOpen={isOpen}>
       <HeaderCart>
@@ -31,6 +42,34 @@ export const Cart = ({ isOpen, onClose }: ICart) => {
       </HeaderCart>
 
       <ContentCart>
+        {cart.length > 0 && (
+          <>
+            {cart.map((product) => (
+              <>
+                <CardProduct>
+                  <ImageCard src='apple-watch.png' />
+
+                  <NameProduct>{product.name}</NameProduct>
+
+                  <SectionQuantities>
+                    <p>Qtd:</p>
+
+                    <BoxQuantities>
+                      <span>-</span>
+                      <span>1</span>
+                      <span>+</span>
+                    </BoxQuantities>
+                  </SectionQuantities>
+
+                  <PriceProduct>R${product.price.toFixed(0)}</PriceProduct>
+                </CardProduct>
+              </>
+            ))}
+          </>
+        )}
+      </ContentCart>
+
+      {/* <ContentCart>
         <CardProduct>
           <ImageCard src='apple-watch.png' />
 
@@ -84,11 +123,11 @@ export const Cart = ({ isOpen, onClose }: ICart) => {
 
           <PriceProduct>R$399</PriceProduct>
         </CardProduct>
-      </ContentCart>
+      </ContentCart> */}
 
       <SectionTotalProducts>
         <p>Total:</p>
-        <p>R$798</p>
+        <p>R${total.toFixed(0)}</p>
       </SectionTotalProducts>
 
       <ButtonFinish>Finalizar Compra</ButtonFinish>
