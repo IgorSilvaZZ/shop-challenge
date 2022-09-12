@@ -19,7 +19,12 @@ export const BoxProduct = styled(FlexColumnCenter)`
 
 export const ContentProduct = styled(FlexColumnCenter)`
   width: 90%;
-  height: 100%;
+  height: 90%;
+`;
+
+export const ImageSection = styled(FlexColumnCenter)`
+  width: 100%;
+  height: 60%;
 `;
 
 export const ImageProduct = styled.img`
@@ -36,8 +41,11 @@ export const TitleSection = styled.div`
 `;
 
 export const TitleProduct = styled.div`
-  height: fit-content;
-  width: fit-content;
+  height: 70%;
+  width: 90%;
+
+  overflow: hidden;
+  text-overflow: ellipsis;
 
   p {
     font-size: 15px;
@@ -68,6 +76,9 @@ export const DescriptionSection = styled.div`
   width: 100%;
   height: 10%;
 
+  overflow: hidden;
+  text-overflow: ellipsis;
+
   p {
     font-weight: 300;
     font-size: 10px;
@@ -83,7 +94,7 @@ export const FooterProduct = styled.div`
   width: 100%;
   height: 10%;
 
-  background: #0f52ba;
+  background: #8e44ad;
 
   border-radius: 0px 0px 8px 8px;
 

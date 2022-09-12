@@ -1,6 +1,7 @@
 import { useDispatch } from "react-redux";
 
 import { cartActions } from "../../store/cartSlice";
+import { IProduct } from "../../types/IProduct";
 
 import {
   BoxProduct,
@@ -8,48 +9,50 @@ import {
   DescriptionSection,
   FooterProduct,
   ImageProduct,
+  ImageSection,
   PriceProduct,
   TitleProduct,
   TitleSection,
 } from "./style";
 
-export const Product = () => {
+interface IProductProps {
+  product: IProduct;
+}
+
+export const Product = ({ product }: IProductProps) => {
   const dispatch = useDispatch();
 
-  function handleCart() {
-    dispatch(
-      cartActions.addCart({
-        id: 1,
-        name: "iPhone X 128 GB",
-        brand: "Apple",
-        description:
-          "O Apple iPhone X é um smartphone iOS avançado e abrangente em todos os pontos de vista com algumas características excelentes",
-        price: 2000.1,
-      })
-    );
+  function handleCart(product: IProduct) {
+    dispatch(cartActions.addCart(product));
   }
 
   return (
     <BoxProduct>
       <ContentProduct>
-        <ImageProduct src='apple-watch.png' />
+        <ImageSection>
+          <ImageProduct src={product.image} />
+        </ImageSection>
 
         <TitleSection>
           <TitleProduct>
-            <p>Apple Watch Series 4 GPS</p>
+            <p>{product.title}</p>
           </TitleProduct>
           <PriceProduct>
-            <p>R$ 399</p>
+            <p>R$ {product.price.toFixed(0)}</p>
           </PriceProduct>
         </TitleSection>
 
         <DescriptionSection>
-          <p>Redesigned from scratch and completely revised.</p>
+          <p>{product.description}</p>
         </DescriptionSection>
       </ContentProduct>
 
       <FooterProduct>
-        <img src='shopping-bag.png' alt='Bag Icon' onClick={handleCart} />
+        <img
+          src='shopping-bag.png'
+          alt='Bag Icon'
+          onClick={() => handleCart(product)}
+        />
         <span>COMPRAR</span>
       </FooterProduct>
     </BoxProduct>

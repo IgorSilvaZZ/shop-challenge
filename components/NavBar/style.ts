@@ -10,7 +10,7 @@ export const ContainerNavBar = styled.div`
 
   padding: 10px 50px;
 
-  background: #0f52ba;
+  background: #8e44ad;
 `;
 
 export const LogoSection = styled.section`

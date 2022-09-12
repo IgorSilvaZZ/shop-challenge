@@ -14,7 +14,7 @@ export const ContainerCart = styled.div<IContainerCart>`
 
   right: ${(props) => (props.isOpen ? "0" : "-100vh")};
 
-  background: #0f52ba;
+  background: #8e44ad;
   box-shadow: -5px 0px 6px rgba(0, 0, 0, 0.13);
 
   transition: 350ms;
@@ -49,7 +49,7 @@ export const CloseCartIcon = styled.span`
 
   border-radius: 50%;
 
-  background: #000000;
+  background: #2d3436;
 
   color: white;
 
@@ -177,7 +177,7 @@ export const ButtonFinish = styled.button`
   font-size: 28px;
 
   color: #ffffff;
-  background: #000000;
+  background: #2d3436;
 
   outline: none;
   border: none;

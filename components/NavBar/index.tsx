@@ -1,4 +1,3 @@
-import { useEffect } from "react";
 import { useSelector } from "react-redux";
 import { selectCart } from "../../store/cartSlice";
 
@@ -14,8 +13,8 @@ export const NavBar = ({ handleCart }: INavBar) => {
   return (
     <ContainerNavBar>
       <LogoSection>
-        <span>MKS</span>
-        <p>Sistemas</p>
+        <span>Slim</span>
+        <p>Shop</p>
       </LogoSection>
 
       <SectionCart>
