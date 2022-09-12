@@ -1,5 +1,5 @@
-import { useSelector } from "react-redux";
-import { selectCart } from "../../store/cartSlice";
+import { useSelector, useDispatch } from "react-redux";
+import { selectCart, cartActions } from "../../store/cartSlice";
 import {
   BoxQuantities,
   ButtonFinish,
@@ -22,6 +22,8 @@ interface ICart {
 }
 
 export const Cart = ({ isOpen, onClose }: ICart) => {
+  const dispatch = useDispatch();
+
   const cart = useSelector(selectCart);
 
   const total =
@@ -30,6 +32,22 @@ export const Cart = ({ isOpen, onClose }: ICart) => {
           return prevent + current.price;
         }, 0)
       : 0;
+
+  function addQuantity(id: number) {
+    dispatch(
+      cartActions.addQuantityProduct({
+        id,
+      })
+    );
+  }
+
+  function removeQuantity(id: number) {
+    dispatch(
+      cartActions.removeQuantityProduct({
+        id,
+      })
+    );
+  }
 
   return (
     <ContainerCart isOpen={isOpen}>
@@ -46,8 +64,8 @@ export const Cart = ({ isOpen, onClose }: ICart) => {
           <>
             {cart.map((product) => (
               <>
-                <CardProduct>
-                  <ImageCard src='apple-watch.png' />
+                <CardProduct key={product.id}>
+                  <ImageCard src={product.image} />
 
                   <NameProduct>{product.name}</NameProduct>
 
@@ -55,9 +73,9 @@ export const Cart = ({ isOpen, onClose }: ICart) => {
                     <p>Qtd:</p>
 
                     <BoxQuantities>
-                      <span>-</span>
-                      <span>1</span>
-                      <span>+</span>
+                      <span onClick={() => removeQuantity(product.id)}>-</span>
+                      <span>{product.quantity}</span>
+                      <span onClick={() => addQuantity(product.id)}>+</span>
                     </BoxQuantities>
                   </SectionQuantities>
 
@@ -68,62 +86,6 @@ export const Cart = ({ isOpen, onClose }: ICart) => {
           </>
         )}
       </ContentCart>
-
-      {/* <ContentCart>
-        <CardProduct>
-          <ImageCard src='apple-watch.png' />
-
-          <NameProduct>Apple Watch Series 4 GPS</NameProduct>
-
-          <SectionQuantities>
-            <p>Qtd:</p>
-
-            <BoxQuantities>
-              <span>-</span>
-              <span>1</span>
-              <span>+</span>
-            </BoxQuantities>
-          </SectionQuantities>
-
-          <PriceProduct>R$399</PriceProduct>
-        </CardProduct>
-
-        <CardProduct>
-          <ImageCard src='apple-watch.png' />
-
-          <NameProduct>Apple Watch Series 4 GPS</NameProduct>
-
-          <SectionQuantities>
-            <p>Qtd:</p>
-
-            <BoxQuantities>
-              <span>-</span>
-              <span>1</span>
-              <span>+</span>
-            </BoxQuantities>
-          </SectionQuantities>
-
-          <PriceProduct>R$399</PriceProduct>
-        </CardProduct>
-
-        <CardProduct>
-          <ImageCard src='apple-watch.png' />
-
-          <NameProduct>Apple Watch Sehries 4 GPS</NameProduct>
-
-          <SectionQuantities>
-            <p>Qtd:</p>
-
-            <BoxQuantities>
-              <span>-</span>
-              <span>1</span>
-              <span>+</span>
-            </BoxQuantities>
-          </SectionQuantities>
-
-          <PriceProduct>R$399</PriceProduct>
-        </CardProduct>
-      </ContentCart> */}
 
       <SectionTotalProducts>
         <p>Total:</p>

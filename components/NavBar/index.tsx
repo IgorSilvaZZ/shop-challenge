@@ -10,6 +10,17 @@ interface INavBar {
 export const NavBar = ({ handleCart }: INavBar) => {
   const cart = useSelector(selectCart);
 
+  const totalItemsCart =
+    cart.length > 0
+      ? cart.reduce((prevent, current) => {
+          if (!current.quantity) {
+            return 0;
+          }
+
+          return prevent + current.quantity;
+        }, 0)
+      : 0;
+
   return (
     <ContainerNavBar>
       <LogoSection>
@@ -20,7 +31,7 @@ export const NavBar = ({ handleCart }: INavBar) => {
       <SectionCart>
         <img src='cart.png' alt='Cart Icon' onClick={handleCart} />
 
-        <span>{cart.length}</span>
+        <span>{totalItemsCart}</span>
       </SectionCart>
     </ContainerNavBar>
   );
