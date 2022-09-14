@@ -16,13 +16,20 @@ const Home: NextPage = () => {
   const [products, setProducts] = useState<IProduct[]>([]);
 
   async function getProducts() {
-    const { data } = await api.get("/products", {
+    const { data } = await api.get<IProduct[]>("products", {
       params: {
+        offset: 0,
         limit: 8,
       },
     });
 
-    setProducts(data);
+    const products = data.map((product) => ({
+      ...product,
+      image: "apple-watch.png",
+      priceOriginal: product.price,
+    }));
+
+    setProducts(products);
   }
 
   useEffect(() => {
@@ -32,7 +39,7 @@ const Home: NextPage = () => {
   return (
     <>
       <Head>
-        <title>MKS | Front Challenge</title>
+        <title>Slim | Shop</title>
       </Head>
 
       <Cart isOpen={isCartOpen} onClose={() => setCartOpen(false)} />

@@ -150,6 +150,12 @@ export const PriceProduct = styled.span`
   font-size: 14px;
 `;
 
+export const IconTrash = styled.img`
+  width: 10%;
+
+  cursor: pointer;
+`;
+
 export const SectionTotalProducts = styled.div`
   display: flex;
   align-items: center;

@@ -49,7 +49,8 @@ const slice = createSlice({
           state.cart[indexProduct].quantity + 1;
 
         state.cart[indexProduct].price =
-          state.cart[indexProduct].price * state.cart[indexProduct].quantity;
+          state.cart[indexProduct].priceOriginal *
+          state.cart[indexProduct].quantity;
       }
     },
     removeQuantityProduct(
@@ -61,12 +62,15 @@ const slice = createSlice({
       const indexProduct = state.cart.findIndex((product) => product.id === id);
 
       if (indexProduct > -1) {
-        state.cart[indexProduct].quantity =
-          state.cart[indexProduct].quantity - 1;
+        if (state.cart[indexProduct].quantity > 1) {
+          state.cart[indexProduct].quantity =
+            state.cart[indexProduct].quantity - 1;
 
-        /* state.cart[indexProduct].price =
-          state.cart[indexProduct].price -
-          state.cart[indexProduct].price * state.cart[indexProduct].quantity; */
+          state.cart[indexProduct].price =
+            state.cart[indexProduct].price -
+            state.cart[indexProduct].priceOriginal *
+              state.cart[indexProduct].quantity;
+        }
       }
     },
   },

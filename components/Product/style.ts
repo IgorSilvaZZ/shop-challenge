@@ -58,7 +58,7 @@ export const PriceProduct = styled.div`
   align-items: center;
   justify-content: center;
 
-  width: 100px;
+  width: 130px;
   height: 30px;
 
   background: #373737;
