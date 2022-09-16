@@ -18,14 +18,12 @@ const Home: NextPage = () => {
   async function getProducts() {
     const { data } = await api.get<IProduct[]>("products", {
       params: {
-        offset: 0,
         limit: 8,
       },
     });
 
     const products = data.map((product) => ({
       ...product,
-      image: "apple-watch.png",
       priceOriginal: product.price,
     }));
 
